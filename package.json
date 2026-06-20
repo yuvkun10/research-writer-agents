@@ -4,6 +4,7 @@
   "description": "TypeScript CLI for a deterministic, multi-agent research writer pipeline with optional OpenAI Responses API support.",
   "type": "module",
   "private": true,
+  "license": "MIT",
   "bin": {
     "research-writer-agents": "./dist/cli.js"
   },
