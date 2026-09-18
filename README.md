@@ -87,7 +87,7 @@ This repository ships an [`AGENTS.md`](./AGENTS.md) at its root following the
 open-source AGENTS.md convention. It gives coding agents (such as OpenAI Codex
 or Claude Code) the project overview, the five-agent pipeline contract, the
 build/test/lint/typecheck commands, the repo layout, coding conventions, the
-deterministic-vs-OpenAI provider rules, and the invariants they must not break —
+deterministic-vs-OpenAI provider rules, and the invariants they must not break,
 most importantly that the OpenAI editor pass must preserve every claim ID and
 citation ID. If you are pointing an agent at this repo, start it there.
 
@@ -95,15 +95,15 @@ citation ID. If you are pointing an agent at this repo, start it there.
 
 The pipeline runs five agents in order:
 
-- `planner` — validates the topic and source cards, then creates report sections
+- `planner`: validates the topic and source cards, then creates report sections
   with source IDs attached to each section.
-- `researcher` — converts selected local source cards into section-level
+- `researcher`: converts selected local source cards into section-level
   research notes.
-- `critic` — checks the draft for blocking editorial issues, including claims
+- `critic`: checks the draft for blocking editorial issues, including claims
   without source support.
-- `editor` — applies either a deterministic edit or an optional OpenAI editor
+- `editor`: applies either a deterministic edit or an optional OpenAI editor
   pass that must preserve claim IDs and citation IDs.
-- `citation-auditor` — verifies that final claims cite known source cards and
+- `citation-auditor`: verifies that final claims cite known source cards and
   flags missing, unknown, or unused citations.
 
 ```mermaid
@@ -138,10 +138,10 @@ RESEARCH_WRITER_PROVIDER=deterministic
 
 Provider modes:
 
-- `deterministic` — always run locally with no model call.
-- `auto` — use OpenAI only when `OPENAI_API_KEY` is present; otherwise fall back
+- `deterministic`: always run locally with no model call.
+- `auto`: use OpenAI only when `OPENAI_API_KEY` is present; otherwise fall back
   to deterministic execution.
-- `openai` — request the OpenAI editor pass and fall back to deterministic
+- `openai`: request the OpenAI editor pass and fall back to deterministic
   output if the key is missing or the provider call fails.
 
 Do not commit `.env`, API keys, source-card files with private data, or
@@ -185,12 +185,12 @@ node dist/cli.js --topic "Citation-first research writing" --sources ./sources.j
 
 Options:
 
-- `--topic <topic>` — required report topic.
-- `--sources <path>` — required path to local source-card JSON.
-- `--out-dir <dir>` — output directory, defaults to the current directory.
-- `--format markdown|json|both` — export format, defaults to `markdown`.
-- `--provider auto|deterministic|openai` — provider mode, defaults to `auto`.
-- `--model <model>` — optional OpenAI model override.
+- `--topic <topic>`: required report topic.
+- `--sources <path>`: required path to local source-card JSON.
+- `--out-dir <dir>`: output directory, defaults to the current directory.
+- `--format markdown|json|both`: export format, defaults to `markdown`.
+- `--provider auto|deterministic|openai`: provider mode, defaults to `auto`.
+- `--model <model>`: optional OpenAI model override.
 
 ## Library usage
 
@@ -211,7 +211,7 @@ const report = await runResearchWriterPipeline({
 console.log(renderMarkdownReport(report));
 ```
 
-## Project structure
+## Repository map
 
 ```text
 src/
@@ -251,14 +251,14 @@ GitHub Actions runs the workflow in
 [`.github/workflows/ci.yml`](./.github/workflows/ci.yml) on every push and pull
 request to `main`, using Node 24. The job runs, in order:
 
-1. `npm ci` — clean dependency install.
-2. `npm audit --audit-level=moderate` — fail on moderate or higher
+1. `npm ci`: clean dependency install.
+2. `npm audit --audit-level=moderate`: fail on moderate or higher
    vulnerabilities.
-3. `npm outdated` — surface outdated dependencies.
-4. `npm run lint` — ESLint.
-5. `npm run typecheck` — `tsc --noEmit`.
-6. `npm test` — Vitest suite.
-7. `npm run build` — compile to `dist/`.
+3. `npm outdated`: surface outdated dependencies.
+4. `npm run lint`: ESLint.
+5. `npm run typecheck`: `tsc --noEmit`.
+6. `npm test`: Vitest suite.
+7. `npm run build`: compile to `dist/`.
 
 Dependency updates are automated with Dependabot for both npm packages and
 GitHub Actions (see [`.github/dependabot.yml`](./.github/dependabot.yml)).
@@ -279,6 +279,10 @@ GitHub Actions (see [`.github/dependabot.yml`](./.github/dependabot.yml)).
 
 See [SECURITY.md](./SECURITY.md) for the security policy and how to report
 vulnerabilities.
+
+## Documentation
+
+- [Architecture diagram source](docs/architecture.mmd)
 
 ## License
 

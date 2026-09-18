@@ -1,0 +1,10 @@
+flowchart TD
+    A["Local source cards JSON"] --> B["Planner"]
+    B --> C["Researcher"]
+    C --> D["Critic"]
+    D --> E{"Editor provider"}
+    E -->|"deterministic"| F["Final report"]
+    E -->|"OpenAI Responses API optional"| F
+    F --> G["Citation auditor"]
+    G --> H["Markdown and JSON outputs"]
+    G --> I["Agent trace metadata"]
