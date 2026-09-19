@@ -31,16 +31,16 @@ The pipeline runs five agents in a fixed order. Each stage has a pure
 deterministic implementation in `src/agents.ts`; only the editor stage can
 optionally call a model.
 
-1. **planner** (`planResearch`) — validates the topic and source cards, then
+1. **planner** (`planResearch`): validates the topic and source cards, then
    builds report sections with source IDs attached to each section.
-2. **researcher** (`researchSources`) — turns the selected local source cards
+2. **researcher** (`researchSources`): turns the selected local source cards
    for each section into section-level research notes with citation IDs.
-3. **critic** (`critiqueDraft`) — checks the draft for blocking editorial
+3. **critic** (`critiqueDraft`): checks the draft for blocking editorial
    issues, most importantly claims that lack source support.
-4. **editor** (`editDraft`) — applies a deterministic edit, and, when a model
+4. **editor** (`editDraft`): applies a deterministic edit, and, when a model
    client is provided, an optional OpenAI editor pass. **This pass must preserve
    every claim ID and citation ID** (see "Invariants" below).
-5. **citation-auditor** (`auditCitations` in `src/citations.ts`) — verifies that
+5. **citation-auditor** (`auditCitations` in `src/citations.ts`): verifies that
    every final claim cites a known source card, and flags `missing-citation`,
    `unknown-source`, and `unused-source` issues.
 
@@ -113,10 +113,10 @@ Provider resolution lives in `src/providers.ts` (`resolveProvider`). Mode is
 chosen by the `--provider` flag, the `provider` option, or the
 `RESEARCH_WRITER_PROVIDER` environment variable:
 
-- `deterministic` — never calls a model; runs fully offline.
-- `auto` (default) — use OpenAI only when `OPENAI_API_KEY` is present; otherwise
+- `deterministic`: never calls a model; runs fully offline.
+- `auto` (default): use OpenAI only when `OPENAI_API_KEY` is present; otherwise
   silently fall back to deterministic.
-- `openai` — request the OpenAI editor pass; fall back to deterministic (with a
+- `openai`: request the OpenAI editor pass; fall back to deterministic (with a
   recorded `fallbackReason`) if the key is missing or the provider call throws.
 
 The OpenAI path builds a `ModelClient` that calls the Responses API with
