@@ -6,4 +6,4 @@
 - [usage.md](usage.md): quick start, source card format, CLI options and library usage.
 - [configuration.md](configuration.md): environment variables and provider modes.
 - [privacy-and-citations.md](privacy-and-citations.md): what leaves the machine, and what the citation auditor does and does not check.
-- [archive/](archive/): earlier README versions kept verbatim. [README-2026-09-19.md](archive/README-2026-09-19.md) is the README before the restructure.
+- [archive/](archive/): earlier README versions kept verbatim. [README-2026-09-19.md](https://github.com/yuvkun10/research-writer-agents/blob/90b1c28191f4b8df8156cdb41d62b586052b715f/docs/archive/README-2026-09-19.md) is the README before the restructure.
